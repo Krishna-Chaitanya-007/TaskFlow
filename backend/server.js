@@ -15,11 +15,14 @@ import dotenv from 'dotenv';
 dotenv.config({ path: path.resolve(process.cwd(), '.env') }); 
 const app = express();
 
-app.use(cors());
+// 1. UPDATE CORS: Allow requests from anywhere (for now)
+app.use(cors({
+    origin: '*', // ideally you put your Netlify URL here later
+    credentials: true
+}))
 app.use(express.json());
 
 // Database Connection
-
 const MONGO_URI = process.env.MONGO_URI; 
 
 // Log the URI to make sure it's correct and not undefined before connecting
